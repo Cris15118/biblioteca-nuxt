@@ -5,12 +5,21 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const libroStore = useLibroStore();
 
+<<<<<<< HEAD
 const editarLibro = (libro: Libro)=>{
  router.push('/detalles/'+ libro.id)
 }
 
 const borrarLibro = (libro:string)=>{
   libroStore.deleteLibro(libro.id)
+=======
+const editarLibro = (libro: Libro) => {
+  router.push('/detalles/' + libro.id);
+};
+
+const borrarLibro = (libro: Libro) => {
+  libroStore.deleteLibro(libro.id);
+>>>>>>> 3546277e5b9d0756b866320e8c68b1000ac8c483
   libros.value = libroStore.libros
 };
 
@@ -24,13 +33,17 @@ interface Libro {
   sinopsis: string;
   estado: string;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3546277e5b9d0756b866320e8c68b1000ac8c483
 </script>
 
 <template>
   <div class="titulo-index">
     <h1>LISTADO LIBROS</h1>
   </div>
+<<<<<<< HEAD
   <div >
     <div v-if="libros.length > 0" class="display">
       <el-card
@@ -62,7 +75,33 @@ interface Libro {
     <div v-else>
       <p style="text-align: center;">NO HAY LIBROS DISPONIBLES</p>
     </div>
+=======
+  <div v-if="libros.length > 0" class="display">
+    <el-card
+      v-for="libro in libros"
+      :key="libro.id"
+      class="tarjetas"
+      style="max-width: 300px"
+    >
+      <template #header class="card-header">
+        <h3><strong>Título: </strong>{{ libro.titulo }}</h3>
+      </template>
+      <div style="margin-top: 5px">
+        <p><strong>ID: </strong>{{ libro.id }}</p>
+        <p><strong>Autor: </strong>{{ libro.autor }}</p>
+        <p><strong>Género: </strong>{{ libro.genero }}</p>
+        <p><strong>Sinopsis: </strong>{{ libro.sinopsis }}</p>
+        <p><strong>Estado: </strong>{{ libro.estado }}</p>
+      </div>
+      <el-button type="success" @click="editarLibro(libro)" style="margin-right: 5px;">Editar</el-button>
+      <el-button type="danger" @click="borrarLibro(libro)">Borrar</el-button>
+    </el-card>
+>>>>>>> 3546277e5b9d0756b866320e8c68b1000ac8c483
   </div>
+  <div v-else>
+    <p style="text-align: center;">NO HAY LIBROS DISPONIBLES</p>
+  </div>
+
 </template>
 
 <style scoped>
@@ -83,6 +122,5 @@ interface Libro {
   padding: 3px;
   margin: 18px;
   border-radius: 4px;
-  color: rgb(119, 106, 106);
 }
 </style>
