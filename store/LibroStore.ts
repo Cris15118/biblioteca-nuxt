@@ -36,7 +36,6 @@ export const useLibroStore = defineStore('libro', {
             }
             this.libros.push(libroNuevo);
         },
-<<<<<<< HEAD
         deleteLibro(this:{libros: Libro[]}, libroid:string){
         this.libros = this.libros.filter(libro => libro.id !== libroid);
         
@@ -47,16 +46,6 @@ export const useLibroStore = defineStore('libro', {
             this.libros[index] = libroActualizado
            }
           
-=======
-        deleteLibro(this: { libros: Libro[] }, libroid: string) {
-            this.libros = this.libros.filter(libro => libro.id !== libroid);
-        },
-        updateLibro(this: { libros: Libro[] }, libroActualizado: Libro) {
-            const index = this.libros.findIndex(libro => libro.id === libroActualizado.id);
-            if (index !== -1) {
-                this.libros[index] = libroActualizado;
-            }
->>>>>>> 3546277e5b9d0756b866320e8c68b1000ac8c483
         }
     }
 });
