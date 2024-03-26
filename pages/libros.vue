@@ -1,9 +1,20 @@
 <script setup lang="ts">
 import { useLibroStore } from "../store/LibroStore";
-import { reactive } from "vue";
-import { uid } from "uid";
 import { useRouter } from "vue-router";
 
+const router = useRouter();
+const libroStore = useLibroStore();
+
+const editarLibro = (libro: Libro)=>{
+ router.push('/detalles/'+ libro.id)
+}
+
+const borrarLibro = (libro:string)=>{
+  libroStore.deleteLibro(libro.id)
+  libros.value = libroStore.libros
+};
+
+const libros = ref(libroStore.libros);
 
 interface Libro {
   id: string;
@@ -14,19 +25,6 @@ interface Libro {
   estado: string;
 }
 
-const router = useRouter();
-const libroStore = useLibroStore();
-
-const editarLibro = (libroid)=>{
-  Object.assign(libros, libroStore.updateLibro(libroid))
-  console.log("eddddiiiiitarrr....")
-}
-
-const borrarLibro = (libroid:string)=>{
-  libroStore.deleteLibro(libroid)
-  console.log("boooorrraaaarrrr.....")
-}
-const libros = libroStore.libros;
 </script>
 
 <template>
@@ -44,7 +42,9 @@ const libros = libroStore.libros;
       >
         <template #header class="card-header">
           <h3><strong>Título: </strong>{{ libro.titulo }}</h3>
+          <hr>
         </template>
+        
         <div style="margin-top: 5px">
           <p><strong>ID: </strong>{{ libro.id }}</p>
           <p><strong>Autor: </strong>{{ libro.autor }}</p>
@@ -52,14 +52,11 @@ const libros = libroStore.libros;
           <p><strong>Sinopsis: </strong>{{ libro.sinopsis }}</p>
           <p><strong>Estado: </strong>{{ libro.estado }}</p>
         </div>
-        <NuxtLink :to="{ name: 'detalles-id', params: { id: libro.id } }"
-          ><el-button type="success" @click="editarLibro" style="margin-right: 5px;"
-            >Editar</el-button
-          ></NuxtLink
-        >
-        <el-button type="danger" @click="borrarLibro"
-          >Borrar</el-button
-        >
+        <el-button type="success" @click="editarLibro(libro)" style="margin-right: 5px">Editar</el-button
+          >
+        
+        <el-button type="danger" @click="borrarLibro(libro)"
+          >Borrar</el-button>
       </el-card>
     </div>
     <div v-else>

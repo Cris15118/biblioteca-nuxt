@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { useLibroStore } from '~/store/LibroStore';
-import { reactive } from 'vue';
+import { ref, onMounted } from 'vue';
 import { uid } from 'uid';
 import { useRouter } from 'vue-router';
-
-
 
 interface Libro {
   id: string;
@@ -16,10 +14,11 @@ interface Libro {
 }
 
 const router = useRouter()
-
 const libroStore = useLibroStore()
- const libro = reactive<Libro[]>({
-   id: null,
+const libroId = router.currentRoute.value.params.id;
+
+const libro: Ref<Libro> = ref({
+   id: uid(),
    titulo:"",
    autor: "",
    genero: "",
@@ -27,14 +26,21 @@ const libroStore = useLibroStore()
    estado: "",
  });
 
- const actualizarLibro = (libroid:string)=>{
+ onMounted(()=>{
+  const id: string = Array.isArray(libroId)? libroId[0] : libroId
+  const libroSeleccionado = libroStore.getLibroById(id)
+  if(libroSeleccionado){
+    Object.assign(libro.value, libroSeleccionado)
+  }else{
+    alert(`No se encontró ningún libro con es Id: ${libroId}`)
+  }
+ })
+
+ const actualizarLibro = () =>{
+    libroStore.updateLibro(libro.value)
+    router.push('/libros')
   
-  Object.assign(libro, libroStore.updateLibro(libroid))
-
  }
- 
-
-  const libros = libroStore.libros
 </script>
 
 <template>
@@ -44,7 +50,6 @@ const libroStore = useLibroStore()
     <div class="container-form">
     <el-form
       @submit.prevent="actualizarLibro"
-      
       label-width="auto"
       style="max-width: 600px"
     >
@@ -55,9 +60,7 @@ const libroStore = useLibroStore()
         />
       </el-form-item>
       <el-form-item label="Autor" >
-        <el-input
-          v-model="libro.autor"
-          
+        <el-input v-model="libro.autor"
           placeholder="Introduce el nombre del Autor"
         />
       </el-form-item>
@@ -84,10 +87,11 @@ const libroStore = useLibroStore()
         </el-radio-group>
       </el-form-item>
       <el-form-item>
-        <el-button type="success" @click="actualizarLibro"
+        <el-button type="success" @click="actualizarLibro" style="margin-right: 10px;"
           >Aceptar</el-button
         >
-       <NuxtLink to="/libros"><el-button type="info">Volver Listado</el-button></NuxtLink>
+        <router-link to="/libros">
+       <el-button type="info" >Volver Listado</el-button></router-link>
       </el-form-item>
     </el-form>
   </div>
