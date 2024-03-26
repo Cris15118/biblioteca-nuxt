@@ -154,20 +154,7 @@ const libros = libroStore.libros;
     </el-form>
   </div>
  
-<div>
-      <h2>Libros añadidos:</h2>
-      <div v-for="libro in libros" :key="libro.id">
-        <p><strong>Título:</strong> {{ libro.titulo }}</p>
-        <p><strong>Autor:</strong> {{ libro.autor }}</p>
-        <p><strong>Género:</strong> {{ libro.genero }}</p>
-        <p><strong>Fecha de adquisición:</strong> {{ libro.fecha }}</p>
-        <p><strong>Sinopsis:</strong> {{ libro.sinopsis }}</p>
-        <p><strong>Estado:</strong> {{ libro.estado }}</p>
-        <hr>
-      </div>
-      <el-button type="danger" @click="libroStore.deleteLibro">Eliminar</el-button>
-      <el-button type="success" @click="editarLibro">Editar</el-button>
-    </div>
+
 </template>
 
 <style scoped>
