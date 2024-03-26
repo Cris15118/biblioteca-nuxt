@@ -1,10 +1,54 @@
+<template>
+  <div>
+    <div class="titulo-index">
+      <h1>EDITAR LIBROS</h1>
+    </div>
+    <div class="container-form">
+      <el-form
+        :model="libro"
+        label-width="auto"
+        style="max-width: 600px"
+      >
+        <el-form-item label="Título">
+          <el-input v-model="libro.titulo" placeholder="Introduce el título del libro" />
+        </el-form-item>
+        <el-form-item label="Autor">
+          <el-input v-model="libro.autor" placeholder="Introduce el nombre del Autor" />
+        </el-form-item>
+        <el-form-item label="Género">
+          <el-select v-model="libro.genero" placeholder="Elige el genero">
+            <el-option label="Ciencia Ficcion" value="Ciencia Ficcion" />
+            <el-option label="Romántica" value="Romantica" />
+            <el-option label="Novela Negra" value="Novela Negra" />
+            <el-option label="Terror" value="Terror" />
+            <el-option label="Narrativa" value="Narrativa" />
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Sinopsis">
+          <el-input v-model="libro.sinopsis" type="textarea" placeholder="Describe el Libro" />
+        </el-form-item>
+        <el-form-item label="Estado">
+          <el-radio-group v-model="libro.estado">
+            <el-radio label="Prestado">Prestado</el-radio>
+            <el-radio label="No Prestado">No Prestado</el-radio>
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="success" @click="actualizarLibro">Aceptar</el-button>
+          <router-link to="/libros">
+            <el-button type="info">Volver Listado</el-button>
+          </router-link>
+        </el-form-item>
+      </el-form>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { useLibroStore } from '~/store/LibroStore';
-import { reactive } from 'vue';
-import { uid } from 'uid';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-
-
+import { uid } from 'uid';
 
 interface Libro {
   id: string;
@@ -15,86 +59,36 @@ interface Libro {
   estado: string;
 }
 
-const router = useRouter()
+const router = useRouter();
+const libroStore = useLibroStore();
+const libroId = router.currentRoute.value.params.id;
 
-const libroStore = useLibroStore()
- const libro = reactive<Libro[]>({
-   id: null,
-   titulo:"",
-   autor: "",
-   genero: "",
-   sinopsis: "",
-   estado: "",
- });
+const libro: Ref<Libro> = ref({
+  id: uid(),
+  titulo: "",
+  autor: "",
+  genero: "",
+  sinopsis: "",
+  estado: ""
+});
 
- const actualizarLibro = (libroid:string)=>{
-  
-  Object.assign(libro, libroStore.updateLibro(libroid))
+  onMounted(() => {
+    const id: string = Array.isArray(libroId) ? libroId[0] : libroId;
+    const libroSeleccionado = libroStore.getLibroById(id);
+    if (libroSeleccionado) {
+      Object.assign(libro.value, libroSeleccionado);
+    } else {
+      console.error(`No se encontró ningún libro con el ID: ${libroId}`);
+    }
+  });
 
- }
- 
-
-  const libros = libroStore.libros
+const actualizarLibro = () => {
+  libroStore.updateLibro(libro.value);
+  router.push('/libros');
+};
 </script>
 
-<template>
- <div class="titulo-index">
-    <h1>EDITAR LIBROS</h1>
-  </div>
-    <div class="container-form">
-    <el-form
-      @submit.prevent="actualizarLibro"
-      
-      label-width="auto"
-      style="max-width: 600px"
-    >
-      <el-form-item label="Título" >
-        <el-input
-          v-model="libro.titulo"
-          placeholder="Introduce el título del libro"
-        />
-      </el-form-item>
-      <el-form-item label="Autor" >
-        <el-input
-          v-model="libro.autor"
-          
-          placeholder="Introduce el nombre del Autor"
-        />
-      </el-form-item>
-      <el-form-item label="Género" >
-        <el-select v-model="libro.genero" placeholder="Elige el genero">
-          <el-option label="Ciencia Ficcion" value="Ciencia Ficcion"/>
-          <el-option label="Romántica" value="Romantica" />
-          <el-option label="Novela Negra" value="Novela Negra" />
-          <el-option label="Terror" value="Terror" />
-          <el-option label="Narrativa" value="Narrativa" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="Sinopsis" >
-        <el-input
-        v-model="libro.sinopsis"
-          type="textarea"
-          placeholder="Describe el Libro"
-        />
-      </el-form-item>
-      <el-form-item label="Estado">
-        <el-radio-group v-model="libro.estado">
-          <el-radio value="Prestado">Prestado</el-radio>
-          <el-radio value="No Prestado">No Prestado</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="success" @click="actualizarLibro"
-          >Aceptar</el-button
-        >
-       <NuxtLink to="/libros"><el-button type="info">Volver Listado</el-button></NuxtLink>
-      </el-form-item>
-    </el-form>
-  </div>
-    
-  </template>
-
-<style scoped>
+<style lang ="scss" scoped>
 .container-form {
   display: flex;
   justify-content: center;
@@ -108,5 +102,4 @@ const libroStore = useLibroStore()
   border-radius: 4px;
   color: rgb(119, 106, 106);
 }
-
 </style>
