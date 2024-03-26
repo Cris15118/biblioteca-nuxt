@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>detalles-libros</h1>
+        <h1>Ruta dinamica</h1>
     </div>
 </template>
 

@@ -2,8 +2,8 @@
 import { useLibroStore } from "../store/LibroStore";
 import { reactive } from "vue";
 import { uid } from "uid";
-import type { id } from "element-plus/es/locale/index.mjs";
 import { useRouter } from "vue-router";
+
 
 interface Libro {
   id: string;
@@ -16,21 +16,15 @@ interface Libro {
 
 const router = useRouter();
 const libroStore = useLibroStore();
-const libro = reactive<Libro[]>({
-  id: null,
-  titulo: "",
-  autor: "",
-  genero: "",
-  sinopsis: "",
-  estado: "",
-});
-const editarLibro = (id)=>{
-  libroStore.updateLibro(id)
+
+const editarLibro = (libroid)=>{
+  Object.assign(libros, libroStore.updateLibro(libroid))
+  console.log("eddddiiiiitarrr....")
 }
 
-const borrarLibro = (libroId:string)=>{
-  libroStore.deleteLibro(libroId)
-  console.log(libroId)
+const borrarLibro = (libroid:string)=>{
+  libroStore.deleteLibro(libroid)
+  console.log("boooorrraaaarrrr.....")
 }
 const libros = libroStore.libros;
 </script>
@@ -69,7 +63,7 @@ const libros = libroStore.libros;
       </el-card>
     </div>
     <div v-else>
-      <p>NO HAY LIBROS DISPONIBLES</p>
+      <p style="text-align: center;">NO HAY LIBROS DISPONIBLES</p>
     </div>
   </div>
 </template>

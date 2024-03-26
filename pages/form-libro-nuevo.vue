@@ -154,7 +154,7 @@ const libros = libroStore.libros;
     </el-form>
   </div>
  
-  <div v-if="libros.length > 0">
+<div>
       <h2>Libros añadidos:</h2>
       <div v-for="libro in libros" :key="libro.id">
         <p><strong>Título:</strong> {{ libro.titulo }}</p>

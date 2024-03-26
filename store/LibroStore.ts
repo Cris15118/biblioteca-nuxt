@@ -34,15 +34,12 @@ export const useLibroStore = defineStore('libro', {
             }
             this.libros.push(libroNuevo)
         },
-        deleteLibro(this:{libros: Libro[]},libroid:string){
+        deleteLibro(this:{libros: Libro[]}, libroid:string){
         this.libros.filter(libro => libro.id !== libroid)
         
-        
-          
         },
-        updateLibro( id:string){
-           
-           this.libros= this.libros.find(libro => libro.id === id);
+        updateLibro( libroid:string){
+           this.libros= this.libros.filter(libro => libro.id === libroid);
           
         }
         
