@@ -85,10 +85,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   });
 };
 
-const editarLibro = (id:string)=>{
-  libroStore.updateLibro(id)
-  console.log("editando...")
-}
 
 const libros = libroStore.libros;
 </script>
@@ -111,13 +107,13 @@ const libros = libroStore.libros;
       <el-form-item label="Título" prop="titulo">
         <el-input
           v-model="libro.titulo"
-          placeholder="Introduce el título del libro"
+          placeholder="Título del libro"
         />
       </el-form-item>
       <el-form-item label="Autor" prop="autor">
         <el-input
           v-model="libro.autor"
-          placeholder="Introduce el nombre del Autor"
+          placeholder="Nombre del Autor"
         />
       </el-form-item>
       <el-form-item label="Género" prop="genero">

@@ -38,14 +38,12 @@ export const useLibroStore = defineStore('libro', {
         },
         deleteLibro(this:{libros: Libro[]}, libroid:string){
         this.libros = this.libros.filter(libro => libro.id !== libroid);
-        
         },
         updateLibro( this:{libros: Libro[]},libroActualizado:Libro){
            const index = this.libros.findIndex(libro => libro.id === libroActualizado.id);
            if(index !== -1){
             this.libros[index] = libroActualizado
            }
-          
         }
     }
 });

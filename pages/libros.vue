@@ -4,15 +4,20 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const libroStore = useLibroStore();
+const searchLibro = ref<string>('')
 
 const editarLibro = (libro: Libro)=>{
- router.push('/detalles/'+ libro.id)
+ router.push('/editar/'+ libro.id)
 }
 
 const borrarLibro = (libro:string)=>{
   libroStore.deleteLibro(libro.id)
   libros.value = libroStore.libros
 };
+
+const detallesLibro =(libro: Libro)=>{
+  router.push('/detalles/'+libro.id)
+}
 
 const libros = ref(libroStore.libros);
 
@@ -30,6 +35,7 @@ interface Libro {
   <div class="titulo-index">
     <h1>LISTADO LIBROS</h1>
   </div>
+
   <div v-if="libros.length > 0" class="display">
     <el-card
       v-for="libro in libros"
@@ -37,18 +43,24 @@ interface Libro {
       class="tarjetas"
       style="max-width: 300px"
     >
+   
       <template #header class="card-header">
         <h3><strong>Título: </strong>{{ libro.titulo }}</h3>
       </template>
       <div style="margin-top: 5px">
-        <p><strong>ID: </strong>{{ libro.id }}</p>
+        
         <p><strong>Autor: </strong>{{ libro.autor }}</p>
         <p><strong>Género: </strong>{{ libro.genero }}</p>
-        <p><strong>Sinopsis: </strong>{{ libro.sinopsis }}</p>
+        <p class="sinopsis-corta"><strong>Sinopsis: </strong>{{ libro.sinopsis }}</p>
         <p><strong>Estado: </strong>{{ libro.estado }}</p>
       </div>
-      <el-button type="success" @click="editarLibro(libro)" style="margin-right: 5px;">Editar</el-button>
-      <el-button type="danger" @click="borrarLibro(libro)">Borrar</el-button>
+      <div class="botones">
+        <el-button type="info" @click="detallesLibro(libro)">Ver Detalles</el-button>
+        <el-button type="success" @click="editarLibro(libro)">Editar</el-button>
+        <el-button type="danger" @click="borrarLibro(libro)">Borrar</el-button>
+      </div>
+      
+      
     </el-card>
   </div>
   <div v-else>
@@ -75,5 +87,15 @@ interface Libro {
   padding: 3px;
   margin: 18px;
   border-radius: 4px;
+}
+.sinopsis-corta{
+  height: 60px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.botones{
+  display: flex;
+  justify-content: space-between;
 }
 </style>
