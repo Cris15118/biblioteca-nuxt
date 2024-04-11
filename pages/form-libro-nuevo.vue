@@ -58,15 +58,14 @@ const rules = reactive<FormRules<Libro>>({
 });
 
 const añadirLibro = () => {
- 
-    libroStore.addLibro(
-      libro.titulo,
-      libro.autor,
-      libro.genero,
-      libro.sinopsis,
-      libro.estado
-    );
-  
+  libroStore.addLibro(
+    libro.titulo,
+    libro.autor,
+    libro.genero,
+    libro.sinopsis,
+    libro.estado
+  );
+
   router.push({ name: "libros" });
   //Limpiar el formulario despues de añadir el libro
   libro.titulo = "";
@@ -85,7 +84,6 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   });
 };
 
-
 const libros = libroStore.libros;
 </script>
 
@@ -99,30 +97,20 @@ const libros = libroStore.libros;
       :rules="rules"
       class="demo-ruleForm"
       :size="formSize"
-      @submit.prevent="añadirLibro"
+      @submit.prevent="añadirLibro;"
       :model="libro"
       label-width="auto"
       style="max-width: 600px"
     >
       <el-form-item label="Título" prop="titulo">
-        <el-input
-          v-model="libro.titulo"
-          placeholder="Título del libro"
-        />
+        <el-input v-model="libro.titulo" placeholder="Título del libro" />
       </el-form-item>
       <el-form-item label="Autor" prop="autor">
-        <el-input
-          v-model="libro.autor"
-          placeholder="Nombre del Autor"
-        />
+        <el-input v-model="libro.autor" placeholder="Nombre del Autor" />
       </el-form-item>
       <el-form-item label="Género" prop="genero">
         <el-select v-model="libro.genero" placeholder="Elige el genero">
-          <el-option
-            label="Ciencia Ficcion"
-            value="Ciencia Ficcion"
-           
-          />
+          <el-option label="Ciencia Ficcion" value="Ciencia Ficcion" />
           <el-option label="Romántica" value="Romantica" />
           <el-option label="Novela Negra" value="Novela Negra" />
           <el-option label="Terror" value="Terror" />
@@ -149,8 +137,6 @@ const libros = libroStore.libros;
       </el-form-item>
     </el-form>
   </div>
- 
-
 </template>
 
 <style scoped lang="scss">
@@ -160,5 +146,4 @@ const libros = libroStore.libros;
   justify-content: center;
   margin-top: 40px;
 }
-
 </style>

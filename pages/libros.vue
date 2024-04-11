@@ -5,18 +5,18 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const libroStore = useLibroStore();
 
-const editarLibro = (libro: Libro)=>{
- router.push('/editar/'+ libro.id)
-}
-
-const borrarLibro = (libro:string)=>{
-  libroStore.deleteLibro(libro.id)
-  libros.value = libroStore.libros
+const editarLibro = (libro: Libro) => {
+  router.push("/editar/" + libro.id);
 };
 
-const detallesLibro =(libro: Libro)=>{
-  router.push('/detalles/'+libro.id)
-}
+const borrarLibro = (libro: string) => {
+  libroStore.deleteLibro(libro.id);
+  libros.value = libroStore.libros;
+};
+
+const detallesLibro = (libro: Libro) => {
+  router.push("/detalles/" + libro.id);
+};
 
 const libros = ref(libroStore.libros);
 
@@ -42,30 +42,29 @@ interface Libro {
       class="tarjetas"
       style="max-width: 300px"
     >
-   
       <template #header class="card-header">
         <h3><strong>Título: </strong>{{ libro.titulo }}</h3>
       </template>
       <div style="margin-top: 5px">
-        
         <p><strong>Autor: </strong>{{ libro.autor }}</p>
         <p><strong>Género: </strong>{{ libro.genero }}</p>
-        <p class="sinopsis-corta"><strong>Sinopsis: </strong>{{ libro.sinopsis }}</p>
+        <p class="sinopsis-corta">
+          <strong>Sinopsis: </strong>{{ libro.sinopsis }}
+        </p>
         <p><strong>Estado: </strong>{{ libro.estado }}</p>
       </div>
       <div class="botones">
-        <el-button type="info" @click="detallesLibro(libro)">Ver Detalles</el-button>
+        <el-button type="info" @click="detallesLibro(libro)"
+          >Ver Detalles</el-button
+        >
         <el-button type="success" @click="editarLibro(libro)">Editar</el-button>
         <el-button type="danger" @click="borrarLibro(libro)">Borrar</el-button>
       </div>
-      
-      
     </el-card>
   </div>
   <div v-else>
-    <p style="text-align: center;">NO HAY LIBROS DISPONIBLES</p>
+    <p style="text-align: center">NO HAY LIBROS DISPONIBLES</p>
   </div>
-
 </template>
 
 <style scoped lang="scss">
@@ -82,13 +81,13 @@ interface Libro {
   margin-top: 15px;
 }
 
-.sinopsis-corta{
+.sinopsis-corta {
   height: 60px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
 }
-.botones{
+.botones {
   display: flex;
   justify-content: space-between;
 }

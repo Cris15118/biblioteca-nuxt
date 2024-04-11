@@ -43,7 +43,7 @@ const articulos = ref<Articulo[]>([
     <div class="card-1">
       <div class="imagen-card">
         <img
-        class="solo-imagen"
+          class="solo-imagen"
           src="public/img/imagenform.webp"
           alt="foto formulario"
           height="100px"
@@ -58,14 +58,16 @@ const articulos = ref<Articulo[]>([
     <div class="card-1">
       <div class="imagen-card">
         <img
-        class="solo-imagen"
+          class="solo-imagen"
           src="public/img/listado.jpg"
           alt="foto formulario"
           height="100px"
         />
       </div>
       <div>
-        <NuxtLink to="/libros" class="links">Mira nuestro listado de libros</NuxtLink>
+        <NuxtLink to="/libros" class="links"
+          >Mira nuestro listado de libros</NuxtLink
+        >
       </div>
     </div>
   </div>
@@ -74,17 +76,14 @@ const articulos = ref<Articulo[]>([
 <style scoped lang="scss">
 @import "@/assets/styles/encabezado.scss";
 
-
 .card-content {
   padding: 20px;
 }
 
 .card {
-  
   padding: 20px;
   display: flex;
   justify-content: space-around;
-  
 }
 .card-1 {
   background-color: #eac5e9;
@@ -107,10 +106,8 @@ const articulos = ref<Articulo[]>([
   margin-top: 10px;
   display: flex;
   justify-content: center;
-  
 }
-.solo-imagen{
+.solo-imagen {
   border-radius: 20px;
 }
-
 </style>
