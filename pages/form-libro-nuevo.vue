@@ -90,7 +90,7 @@ const libros = libroStore.libros;
 </script>
 
 <template>
-  <div class="titulo-index">
+  <div class="heading">
     <h1>AÑADE UN LIBRO NUEVO</h1>
   </div>
   <div class="container-form">
@@ -138,8 +138,8 @@ const libros = libroStore.libros;
       </el-form-item>
       <el-form-item label="Estado" prop="estado">
         <el-radio-group v-model="libro.estado">
-          <el-radio value="Prestado">Prestado</el-radio>
-          <el-radio value="No Prestado">No Prestado</el-radio>
+          <el-radio value="prestado">Prestado</el-radio>
+          <el-radio value="no prestado">No Prestado</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>
@@ -153,18 +153,12 @@ const libros = libroStore.libros;
 
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "../assets/styles/encabezado.scss";
 .container-form {
   display: flex;
   justify-content: center;
   margin-top: 40px;
 }
-.titulo-index {
-  text-align: center;
-  background-color: #efb0ed;
-  padding: 3px;
-  margin: 18px;
-  border-radius: 4px;
-  color: rgb(119, 106, 106);
-}
+
 </style>

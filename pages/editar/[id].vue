@@ -82,8 +82,8 @@ const libro: Ref<Libro> = ref({
       </el-form-item>
       <el-form-item label="Estado">
         <el-radio-group v-model="libro.estado">
-          <el-radio value="Prestado">Prestado</el-radio>
-          <el-radio value="No Prestado">No Prestado</el-radio>
+          <el-radio value="prestado">Prestado</el-radio>
+          <el-radio value="no prestado">No Prestado</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item>

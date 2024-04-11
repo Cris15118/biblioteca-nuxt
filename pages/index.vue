@@ -27,8 +27,8 @@ const articulos = ref<Articulo[]>([
 ]);
 </script>
 <template>
-  <div class="titulo-index">
-    <h2>GESTIÓN DE BIBLIOTECA</h2>
+  <div class="heading">
+    <h2>CONTROL DE BIBLIOTECA</h2>
   </div>
 
   <div class="card-content">
@@ -71,15 +71,10 @@ const articulos = ref<Articulo[]>([
   </div>
 </template>
 
-<style scoped>
-.titulo-index {
-  text-align: center;
-  background-color: #efb0ed;
-  padding: 3px;
-  margin: 18px;
-  border-radius: 4px;
-  color: rgb(119, 106, 106);
-}
+<style scoped lang="scss">
+@import "@/assets/styles/encabezado.scss";
+
+
 .card-content {
   padding: 20px;
 }

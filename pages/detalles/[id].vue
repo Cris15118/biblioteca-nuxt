@@ -49,36 +49,36 @@ const libro: Ref<Libro> = ref({
  <div class="titulo-index">
     <h1>DETALLES LIBRO</h1>
   </div>
+  <div class="super-card">
     <div class="card">
-      <div>
+      
          <h3><strong>Título: </strong>{{ libro.titulo }}</h3>
-      </div>
+      
      <div>
       <p><strong>Autor: </strong>{{ libro.autor }}</p>
       <p><strong>Género: </strong>{{ libro.genero }}</p>
       <p><strong>Sinopsis: </strong>{{ libro.sinopsis }}</p>
+      
      </div>
      
-      
-      <router-link to="/libros">
+     <router-link to="/libros">
       <el-button type="info">Volver Listado</el-button></router-link>
-    
-    
-
-
-    
   </div>
-    
+</div>
   </template>
 
 <style scoped>
+.super-card{
+  display: flex;
+  justify-content: center;
+}
 .card {
   border: solid 1px gray;
   width: 500px;
-  height: 350px;
+  height: 380px;
   border-radius: 5px;
   padding: 20px;
-  margin-left: 100px;
+  text-align: center;
 }
 .titulo-index {
   text-align: center;

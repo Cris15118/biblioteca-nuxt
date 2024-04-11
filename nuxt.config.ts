@@ -4,6 +4,8 @@ const config: NuxtConfig = {
     "@nuxt/typescript-build",
     '@nuxtjs/style-resources',
     '@pinia/nuxt',
+    
+    
   ],
   plugins: [{ 
     src: "~/plugins/element-plus.js",
@@ -13,12 +15,16 @@ const config: NuxtConfig = {
     "element-plus/dist/index.css"
   ],
   modules: [
-    "@element-plus/nuxt"
+    "@element-plus/nuxt",
+    
+    
   ],
   styleResources: {
     scss: [
-    '~/assets/styles/variables.scss'
+    '~/assets/styles/variables.scss',
+    
     ]
-    }
+    },
+   
 };
 export default config;

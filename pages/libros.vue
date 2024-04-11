@@ -4,7 +4,6 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 const libroStore = useLibroStore();
-const searchLibro = ref<string>('')
 
 const editarLibro = (libro: Libro)=>{
  router.push('/editar/'+ libro.id)
@@ -32,7 +31,7 @@ interface Libro {
 </script>
 
 <template>
-  <div class="titulo-index">
+  <div class="heading">
     <h1>LISTADO LIBROS</h1>
   </div>
 
@@ -69,7 +68,8 @@ interface Libro {
 
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@import "../assets/styles/encabezado.scss";
 .tarjetas {
   text-align: justify;
   background-color: #ebdeeb;
@@ -81,13 +81,7 @@ interface Libro {
   gap: 10px;
   margin-top: 15px;
 }
-.titulo-index {
-  text-align: center;
-  background-color: #efb0ed;
-  padding: 3px;
-  margin: 18px;
-  border-radius: 4px;
-}
+
 .sinopsis-corta{
   height: 60px;
   text-overflow: ellipsis;
