@@ -4,6 +4,7 @@ import { ref, onMounted } from 'vue';
 import { uid } from 'uid';
 import { useRouter } from 'vue-router';
 
+
 interface Libro {
   id: string;
   titulo: string;
@@ -12,6 +13,7 @@ interface Libro {
   sinopsis: string;
   estado: string;
 }
+
 
 const router = useRouter()
 const libroStore = useLibroStore()
@@ -25,7 +27,7 @@ const libro: Ref<Libro> = ref({
    sinopsis: "",
    estado: "",
  });
-
+ 
  onMounted(()=>{
   const id: string = Array.isArray(libroId)? libroId[0] : libroId
   const libroSeleccionado = libroStore.getLibroById(id)
@@ -37,14 +39,20 @@ const libro: Ref<Libro> = ref({
  })
 
  const actualizarLibro = () =>{
-    libroStore.updateLibro(libro.value)
+  if(!libro.value.titulo || !libro.value.autor || !libro.value.sinopsis){
+     alert("Por favor, completa todos los campos ")
+    
+  }else{
+   libroStore.updateLibro(libro.value)
     router.push('/libros')
-  
+  }
+    
  }
+ 
 </script>
 
 <template>
- <div class="titulo-index">
+ <div class="heading">
     <h1>EDITAR LIBROS</h1>
   </div>
     <div class="container-form">
@@ -64,7 +72,7 @@ const libro: Ref<Libro> = ref({
           placeholder="Introduce el nombre del Autor"
         />
       </el-form-item>
-      <el-form-item label="Género" >
+      <el-form-item label="Género">
         <el-select v-model="libro.genero" placeholder="Elige el genero">
           <el-option label="Ciencia Ficcion" value="Ciencia Ficcion"/>
           <el-option label="Romántica" value="Romantica" />
@@ -99,17 +107,11 @@ const libro: Ref<Libro> = ref({
   </template>
 
 <style scoped>
+@import "../../assets/styles/encabezado.scss";
 .container-form {
   display: flex;
   justify-content: center;
   margin-top: 40px;
 }
-.titulo-index {
-  text-align: center;
-  background-color: #efb0ed;
-  padding: 3px;
-  margin: 18px;
-  border-radius: 4px;
-  color: rgb(119, 106, 106);
-}
+
 </style>
